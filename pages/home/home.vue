@@ -1,5 +1,10 @@
 <template>
   <view>
+    <!-- 搜索组件-->
+    <view class="search-box">
+      <my-search @click="gotoSearch"></my-search>
+    </view>
+
     <!-- 轮播图    -->
     <swiper :indicator-dots="true" :autoplay="true" :interval="3000" :duration="1000" :circular="true">
       <swiper-item v-for="(item, i) in swiperList" :key="i">
@@ -36,7 +41,8 @@
 
           <!-- 楼层右侧4个大图片-->
           <view class="right-img-box">
-            <navigator class="right-img-item" v-for="(item2, i2) in item.product_list" :key="i2" v-if="i2 != 0" :url="item2.url">
+            <navigator class="right-img-item" v-for="(item2, i2) in item.product_list" :key="i2" v-if="i2 != 0"
+              :url="item2.url">
               <image :src="item2.image_src" :style="{width : item2.image_width + 'rpx'}" mode="widthFix"></image>
             </navigator>
           </view>
@@ -73,6 +79,12 @@
       this.getFloorList()
     },
     methods: {
+      gotoSearch() {
+        // console.log('gotoSearch')
+        uni.navigateTo({
+          url: '../../subpkg/search/search'
+        })
+      },
       async getSwiperList() {
         const {
           data: res
@@ -172,5 +184,15 @@
   .floor-img-box {
     display: flex;
     padding-left: 10rpx;
+  }
+
+
+  .search-box {
+    // 设置定位效果为吸顶（固定）
+    position: sticky;
+    // 位置
+    top: 0;
+    // 提高层级防止被轮播图覆盖
+    z-index: 999;
   }
 </style>

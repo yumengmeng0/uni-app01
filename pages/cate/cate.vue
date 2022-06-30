@@ -1,5 +1,6 @@
 <template>
   <view>
+    <my-search bgcolor="#000" @click="gotoSearch"></my-search>
     <view class="scroll-view-container">
       <!-- 左侧滑动区域-->
       <scroll-view scroll-y="true" :style="{height: windowHeight + 'px'}" class="left-scroll-view">
@@ -45,6 +46,12 @@
       }
     },
     methods: {
+      gotoSearch(){
+        // console.log('gotoSearch')
+        uni.navigateTo({
+          url:'../../subpkg/search/search'
+        })
+      },
       // 获取分类表数据
       async getCateList() {
 
@@ -74,8 +81,9 @@
     onLoad() {
       const sysInfo = uni.getSystemInfoSync() // 同步获取
       // const sysInfo2 = uni.getSystemInfo() // 异步获取（返回Promise对象）
-      this.windowHeight = sysInfo.windowHeight
-      console.log(this.windowHeight)
+      // 50是搜索区域的高度
+      this.windowHeight = sysInfo.windowHeight - 50
+      // console.log(this.windowHeight)
       this.getCateList();
     }
   }
