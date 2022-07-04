@@ -31,7 +31,12 @@
 </template>
 
 <script>
+  // import {
+  //   badgeMix
+  // } from '@/mixins/tabbar-badge.js'
+
   export default {
+    // mixins: [badgeMix],
     data() {
       return {
         // 当前设备可用高度
@@ -46,10 +51,10 @@
       }
     },
     methods: {
-      gotoSearch(){
+      gotoSearch() {
         // console.log('gotoSearch')
         uni.navigateTo({
-          url:'../../subpkg/search/search'
+          url: '../../subpkg/search/search'
         })
       },
       // 获取分类表数据
