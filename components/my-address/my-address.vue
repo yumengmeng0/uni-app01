@@ -55,17 +55,20 @@
     methods: {
       ...mapMutations('m_user', ['updateAddress']),
       async chooseAddress() {
+        // 成功传给第二个参数，失败，把错误传给第二个参数
         const [err, succ] = await uni.chooseAddress().catch(err => err)
-        // const res = await uni.chooseAddress().catch(err => err)
-        // console.log(res)
+        console.log('succ')
+        console.log(succ.errMsg)
+        console.log(this.addstr)
         if (err === null && succ.errMsg === 'chooseAddress:ok') {
           this.address = succ
           this.updateAddress(succ)
         }
 
-        console.log(err)
+        // console.log(err)
 
-        if (err && err.errMsg === 'chooseAddress:fail auth deny' || err.errMsg === 'chooseAddress:fail authorize no response') {
+        if (err && (err.errMsg === 'chooseAddress:fail auth deny' || err.errMsg ===
+            'chooseAddress:fail authorize no response')) {
           this.reAuth() // 向用户重新发起授权申请
         }
 
